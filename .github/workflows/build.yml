@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    defaults:
+      run:
+        shell: powershell
+    env:
+      IMAGE_NAME: mcr.microsoft.com/businesscentral/sandbox:ltsc2019
+      TEST_USERNAME: docker
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+      CONTAINER_NAME: tmp
+      APP_NAME: seminar.app
+    runs-on: windows-latest
+    steps:
+      - name: Set up NAV Container
+        run: |
+          Install-Module navcontainerhelper -Force
+          Get-Command -Module navcontainerhelper | Out-Null
+          New-NavContainer `
+            -imageName $env:IMAGE_NAME `
+            -containerName $env:CONTAINER_NAME `
+            -accept_eula `
+            -accept_outdated `
+            -auth NavUserPassword `
+            -credential (New-Object PSCredential $env:TEST_USERNAME, (ConvertTo-SecureString $env:TEST_PASSWORD -AsPlainText -Force)) `
+            -additionalParameters @('--volume ' + '"' + (Join-Path $pwd ":c:\share") + '"')
+      - uses: actions/checkout@v2
+      - name: Build App
+        run: |
+          Compile-AppInBCContainer `
+            -containerName $env:CONTAINER_NAME `
+            -credential (New-Object PSCredential $env:TEST_USERNAME, (ConvertTo-SecureString $env:TEST_PASSWORD -AsPlainText -Force)) `
+            -appProjectFolder $pwd `
+            -appOutputFolder $pwd `
+            -appName $env:APP_NAME
+      - name: Install App
+        run: |
+          Publish-NavContainerApp `
+            -containerName $env:CONTAINER_NAME `
+            -appFile (Join-Path $pwd $env:APP_NAME) `
+            -skipVerification `
+            -sync `
+            -install
