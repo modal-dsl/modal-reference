@@ -42,3 +42,7 @@ jobs:
             -appProjectFolder $pwd `
             -appOutputFolder $pwd `
             -appName $env:APP_NAME
+      - uses: actions/upload-artifact@v2
+        with:
+          name: $APP_NAME
+          path: $APP_NAME
