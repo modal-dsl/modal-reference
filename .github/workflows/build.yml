@@ -44,5 +44,5 @@ jobs:
             -appName $env:APP_NAME
       - uses: actions/upload-artifact@v2
         with:
-          name: $APP_NAME
-          path: $APP_NAME
+          name: seminar.app
+          path: seminar.app
