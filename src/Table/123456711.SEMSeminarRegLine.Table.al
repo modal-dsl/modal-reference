@@ -392,6 +392,8 @@ table 123456711 "SEM Seminar Reg. Line"
     begin
         GetSeminarRegHeader;
 
+        OnBeforeInitRecord(Rec, SeminarRegHeader);
+
         Init();
         If "Registration Date" = 0D then
             "Registration Date" := WorkDate();
@@ -399,6 +401,18 @@ table 123456711 "SEM Seminar Reg. Line"
         "External Document No." := SeminarRegHeader."External Document No.";
         "Shortcut Dimension 1 Code" := SeminarRegHeader."Shortcut Dimension 1 Code";
         "Shortcut Dimension 2 Code" := SeminarRegHeader."Shortcut Dimension 2 Code";
+
+        OnAfterInitRecord(Rec, SeminarRegHeader);
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeInitRecord(var SeminarRegLine: Record "SEM Seminar Reg. Line"; var SeminarRegHeader: Record "SEM Seminar Reg. Header")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterInitRecord(var SeminarRegLine: Record "SEM Seminar Reg. Line"; var SeminarRegHeader: Record "SEM Seminar Reg. Header")
+    begin
     end;
 
     procedure SetHideValidationDialog(NewHideValidationDialog: Boolean)
