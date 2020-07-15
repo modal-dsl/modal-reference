@@ -645,7 +645,7 @@ table 123456710 "SEM Seminar Reg. Header"
         IsHandled: Boolean;
     begin
         GetSeminarSetup();
-        ;
+
         IsHandled := false;
         OnBeforeGetNoSeriesCode(Rec, SeminarSetup, NoSeriesCode, IsHandled);
         if IsHandled then
