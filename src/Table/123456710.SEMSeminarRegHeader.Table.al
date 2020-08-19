@@ -249,8 +249,6 @@ table 123456710 "SEM Seminar Reg. Header"
             TableRelation = if ("Room Country/Region Code" = const('')) "Post Code".City
             else
             if ("Room Country/Region Code" = filter(<> '')) "Post Code".City where("Country/Region Code" = field("Room Country/Region Code"));
-            //This property is currently not supported
-            //TestTableRelation = false;
             ValidateTableRelation = false;
 
             trigger OnLookup()
@@ -284,8 +282,6 @@ table 123456710 "SEM Seminar Reg. Header"
             TableRelation = if ("Room Country/Region Code" = const('')) "Post Code"
             else
             if ("Room Country/Region Code" = filter(<> '')) "Post Code" where("Country/Region Code" = field("Room Country/Region Code"));
-            //This property is currently not supported
-            //TestTableRelation = false;
             ValidateTableRelation = false;
 
             trigger OnLookup()
@@ -373,7 +369,6 @@ table 123456710 "SEM Seminar Reg. Header"
         field(55; "External Document No."; Code[35])
         {
             Caption = 'External Document No.';
-
         }
         field(56; "Reason Code"; Code[10])
         {

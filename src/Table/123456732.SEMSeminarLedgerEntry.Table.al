@@ -30,13 +30,6 @@ table 123456732 "SEM Seminar Ledger Entry"
         field(6; "Document No."; Code[20])
         {
             Caption = 'Document No.';
-
-            // trigger OnLookup()
-            // var
-            //     IncomingDocument: Record "Incoming Document";
-            // begin
-            //     IncomingDocument.HyperlinkToDocument("Document No.", "Posting Date");
-            // end;
         }
         field(7; Description; Text[100])
         {
@@ -196,13 +189,6 @@ table 123456732 "SEM Seminar Ledger Entry"
         FindRecordManagement.GetLastEntryIntFieldValues(Rec, FieldNoValues);
         LastEntryNo := FieldNoValues.Get(1);
     end;
-
-    // procedure ShowDimensions()
-    // var
-    //     DimMgt: Codeunit DimensionManagement;
-    // begin
-    //     DimMgt.ShowDimensionSet("Dimension Set ID", StrSubstNo('%1 %2', TableCaption, "Entry No."));
-    // end;
 
     procedure CopyFromSeminarJnlLine(SeminarJnlLine: Record "SEM Seminar Journal Line")
     begin

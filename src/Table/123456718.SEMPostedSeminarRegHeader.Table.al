@@ -105,8 +105,6 @@ table 123456718 "SEM Posted Seminar Reg. Header"
             TableRelation = if ("Room Country/Region Code" = const('')) "Post Code".City
             else
             if ("Room Country/Region Code" = filter(<> '')) "Post Code".City where("Country/Region Code" = field("Room Country/Region Code"));
-            //This property is currently not supported
-            //TestTableRelation = false;
             ValidateTableRelation = false;
         }
         field(26; "Room Contact Person"; Text[50])
@@ -125,8 +123,6 @@ table 123456718 "SEM Posted Seminar Reg. Header"
             TableRelation = if ("Room Country/Region Code" = const('')) "Post Code"
             else
             if ("Room Country/Region Code" = filter(<> '')) "Post Code" where("Country/Region Code" = field("Room Country/Region Code"));
-            //This property is currently not supported
-            //TestTableRelation = false;
             ValidateTableRelation = false;
         }
         field(29; "Room County"; Text[30])

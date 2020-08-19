@@ -172,7 +172,6 @@ table 123456711 "SEM Seminar Reg. Line"
         {
             Caption = 'Line Discount Amount (LCY)';
             AutoFormatType = 1;
-            //AutoFormatExpression = "Currency Code";
 
             trigger OnValidate()
             var
@@ -188,7 +187,6 @@ table 123456711 "SEM Seminar Reg. Line"
         {
             Caption = 'Line Amount (LCY)';
             AutoFormatType = 1;
-            //AutoFormatExpression = "Currency Code";
 
             trigger OnValidate()
             var

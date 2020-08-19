@@ -146,41 +146,6 @@ page 123456721 "SEM Seminar Ledger Entries"
 
     actions
     {
-        // area(navigation)
-        // {
-        //     group("Ent&ry")
-        //     {
-        //         Caption = 'Ent&ry';
-        //         Image = Entry;
-        //         action(Dimensions)
-        //         {
-        //             AccessByPermission = TableData Dimension = R;
-        //             ApplicationArea = Dimensions;
-        //             Caption = 'Dimensions';
-        //             Image = Dimensions;
-        //             ShortCutKey = 'Alt+D';
-        //             ToolTip = 'View or edit dimensions, such as area, project, or department, that you can assign to sales and purchase documents to distribute costs and analyze transaction history.';
-
-        //             trigger OnAction()
-        //             begin
-        //                 ShowDimensions;
-        //             end;
-        //         }
-        //         action(SetDimensionFilter)
-        //         {
-        //             ApplicationArea = Dimensions;
-        //             Caption = 'Set Dimension Filter';
-        //             Ellipsis = true;
-        //             Image = "Filter";
-        //             ToolTip = 'Limit the entries according to the dimension filters that you specify. NOTE: If you use a high number of dimension combinations, this function may not work and can result in a message that the SQL server only supports a maximum of 2100 parameters.';
-
-        //             trigger OnAction()
-        //             begin
-        //                 SetFilter("Dimension Set ID", DimensionSetIDFilter.LookupFilter);
-        //             end;
-        //         }
-        //     }
-        // }
         area(processing)
         {
             action("&Navigate")
@@ -209,6 +174,5 @@ page 123456721 "SEM Seminar Ledger Entries"
 
     var
         Navigate: Page Navigate;
-    // DimensionSetIDFilter: Page "Dimension Set ID Filter";
 }
 

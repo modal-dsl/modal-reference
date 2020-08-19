@@ -47,10 +47,6 @@ table 123456700 "SEM Seminar"
             Caption = 'Last Date Modified';
             Editable = false;
         }
-        field(23; Picture; Media)
-        {
-            Caption = 'Picture';
-        }
         field(24; "No. Series"; Code[20])
         {
             Caption = 'No. Series';
@@ -145,7 +141,7 @@ table 123456700 "SEM Seminar"
     fieldgroups
     {
         fieldgroup(DropDown; "No.", Description) { }
-        fieldgroup(Brick; "No.", Description, "Description 2", Picture) { }
+        fieldgroup(Brick; "No.", Description, "Description 2") { }
     }
 
     trigger OnInsert()

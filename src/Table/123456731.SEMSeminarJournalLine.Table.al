@@ -154,9 +154,6 @@ table 123456731 "SEM Seminar Journal Line"
     trigger OnInsert()
     begin
         SetLastModifiedDateTime;
-
-        //ValidateShortcutDimCode(1, "Shortcut Dimension 1 Code");
-        //ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
     end;
 
     trigger OnModify()
