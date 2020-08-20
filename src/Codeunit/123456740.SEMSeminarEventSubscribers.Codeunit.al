@@ -289,4 +289,34 @@ codeunit 123456740 "SEM Seminar Event Subscribers"
         end;
     end;
 
+    [EventSubscriber(ObjectType::Page, Page::Navigate, 'OnAfterNavigateFindRecords', '', true, false)]
+    local procedure NavigateOnAfterNavigateFindRecords(var DocumentEntry: Record "Document Entry"; DocNoFilter: Text; PostingDateFilter: Text)
+    var
+        PstdSemRegHeader: Record "SEM Posted Seminar Reg. Header";
+        Navigate: Page Navigate;
+    begin
+        If PstdSemRegHeader.ReadPermission then begin
+            PstdSemRegHeader.SetFilter("No.", DocNoFilter);
+            PstdSemRegHeader.SetFilter("Posting Date", PostingDateFilter);
+            Navigate.InsertIntoDocEntry(DocumentEntry, Database::"SEM Posted Seminar Reg. Header", 0, 'Posted Seminar Registration', PstdSemRegHeader.Count);
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Page, Page::Navigate, 'OnAfterNavigateShowRecords', '', true, false)]
+    local procedure NavigateOnAfterNavigateShowRecords(TableID: Integer; DocNoFilter: Text; PostingDateFilter: Text; ItemTrackingSearch: Boolean; var TempDocumentEntry: Record "Document Entry" temporary; SalesInvoiceHeader: Record "Sales Invoice Header"; SalesCrMemoHeader: Record "Sales Cr.Memo Header"; PurchInvHeader: Record "Purch. Inv. Header"; PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr."; ServiceInvoiceHeader: Record "Service Invoice Header"; ServiceCrMemoHeader: Record "Service Cr.Memo Header")
+    var
+        PstdSemRegHeader: Record "SEM Posted Seminar Reg. Header";
+    begin
+        if TableID <> Database::"SEM Posted Seminar Reg. Header" then
+            exit;
+
+        PstdSemRegHeader.SetFilter("No.", DocNoFilter);
+        PstdSemRegHeader.SetFilter("Posting Date", PostingDateFilter);
+
+        If (TempDocumentEntry."No. of Records" = 1) then
+            PAGE.Run(PAGE::"SEM Posted Sem. Registration", PstdSemRegHeader)
+        else
+            PAGE.Run(0, PstdSemRegHeader);
+    end;
+
 }
